@@ -291,8 +291,56 @@ footer{
     text-align: center;
     font-family: 'Pacifico', cursive;
     margin-bottom: 45px;
-    margin-top: 25px;
+    margin-top: 85px;
 }
+
+.advantages{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.advantages-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+}
+
+.advantage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 340px;
+    height: 80px;
+    margin: 25px;
+}
+
+.advantage p{
+    font-size: smaller;
+}
+
+#dd{
+    background-position: center;
+
+    height: 100%;
+    width: 30%;
+    background-image: url(../images/fotel.png);
+}
+
+.advantage div{
+    padding-left: 8px;
+}
+
+.advantage div h1{
+    margin: 5px;
+}
+
+.advantage div p{
+    margin: 5px;
+}
+
 @keyframes rotation {
     from {
       transform: rotate(0deg);
