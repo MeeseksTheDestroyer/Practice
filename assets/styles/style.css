@@ -251,7 +251,7 @@ footer{
     margin-top:35px;
     display:none;
     padding-left:18px;
-    font-family:'Fira Code',monospace
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .question-title{
@@ -259,7 +259,7 @@ footer{
     align-items:center;
     font-size:116%;
     letter-spacing:.1rem;
-    font-family:'Alumni Sans Pinstripe',sans-serif
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .quest1{
@@ -270,8 +270,8 @@ footer{
     justify-content:flex-start;
     font-size:1.45rem;
 
-    font-family: 'Lato', sans-serif;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'PT Serif', serif;
+    font-weight: 600;
 }
 .quest2{
     width:10%;
@@ -339,6 +339,14 @@ footer{
 
 .advantage div p{
     margin: 5px;
+}
+
+.przelewy24{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
 }
 
 @keyframes rotation {
