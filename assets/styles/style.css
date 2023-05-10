@@ -4,8 +4,8 @@
     margin: 0;
 }
 body{
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
 }
 nav{
     display: flex;
@@ -93,14 +93,14 @@ header nav{
 
 main{
     width: 100%;
-
+    min-height: 80vh;
 }
 
 .image{
     border-radius: 122px 18px 150px 0px;
     background-image: url("..//images/prezent-podarunek-prezenty.jpg");
-    width: 600px;
-    height: 430px;
+    width: 70%;
+    height: 110%;
     background-position: center;
     -webkit-box-shadow: 8px 8px 38px 15px rgba(255, 255, 255, 1);
     -moz-box-shadow: 8px 8px 38px 15px rgba(255, 255, 255, 1);
@@ -159,6 +159,7 @@ main{
     justify-content: center;
     align-items: center;
     display: none;
+    
 }
 .header-show{
     position: absolute;
@@ -207,6 +208,118 @@ main{
     cursor: pointer;
 
 }
+
+footer{
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+.info-container{
+    width:100%;
+    
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    overflow:visible;
+    min-height:40vh;
+    padding-top:0vh;
+    padding-bottom:13vh;
+    color: black;
+}
+
+.questions{
+    width:40%;
+    height:80%
+}
+
+
+.question{
+    border-bottom:.5px solid gray;
+    width:100%;
+    color:black;
+    padding-bottom:11px;
+    padding-top:11px;
+    cursor:pointer
+}
+
+.question-description{
+    margin-top:35px;
+    display:none;
+    padding-left:18px;
+    font-family:'Fira Code',monospace
+}
+
+.question-title{
+    display:flex;
+    align-items:center;
+    font-size:116%;
+    letter-spacing:.1rem;
+    font-family:'Alumni Sans Pinstripe',sans-serif
+}
+
+.quest1{
+    width:90%;
+    padding-left:18px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    font-size:1.45rem;
+
+    font-family: 'Lato', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+.quest2{
+    width:10%;
+    padding-right:18px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    overflow:hidden
+}
+.rotation{
+    animation: rotation 0.2s linear;
+}
+
+.title{
+    width: 100%;
+    font-size: 2.2rem;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 45px;
+    margin-top: 25px;
+}
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(45deg);
+    }
+  }
+@media only screen and (max-width:500px){
+
+    .questions{
+        width:90%
+    }
+}
+
+@media only screen and (max-width:800px){
+
+    .description{
+        font-size:65%
+    }
+    .questions{
+        width:80%
+    }
+
+
+    
+}
 @media only screen and (max-width: 950px) {
     .main-container{
         flex-direction: column;
@@ -251,6 +364,9 @@ main{
     header nav{
         width: 50%;
         justify-content: center;
+    }
+    main{
+        min-height: 120vh;
     }
 
     header div img{
