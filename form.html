@@ -3,139 +3,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Combined Form with CSS</title>
+	<link rel="stylesheet" href="assets/styles/form.css">
 	<link rel="stylesheet" href="assets/styles/style.css">
-	<style>
-		/* Common styles for both form sections */
-		body{
-			background-color: aliceblue;
-		}
 
-		#combined-form{
-			height: 72vh;
-		}
-		.form-section {
-			display: flex;
-			flex-direction: column;
-			width: 40%;
-			margin: 50px auto;
-			padding: 20px;
-			border: 1px solid #ddd;
-			border-radius: 10px;
-			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-		}
-
-		.form-section{
-			background-color: white;
-		}
-
-		.form-section h2 {
-			margin-top: 0;
-		}
-
-		input[type="submit"] {
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			margin-top: 10px;
-			border-radius: 5px;
-			cursor: pointer;
-			font-size: 16px;
-		}
-
-		input[type="submit"]:hover {
-			background-color: #3e8e41;
-		}
-
-		/* Styles for input fields */
-		.form-section label {
-			margin-top: 10px;
-			font-size: 16px;
-			font-weight: bold;
-		}
-
-		.form-section input[type="text"],
-		.form-section input[type="number"],
-		.form-section input[type="email"] {
-			margin: 10px 0;
-			padding: 10px;
-			border-radius: 5px;
-			border: 1px solid #ddd;
-			font-size: 16px;
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		#price{
-			width: 30%;
-		}
-
-		#double{
-			display: flex;
-			justify-content: space-between;
-			width: 100%;
-			align-items: center;
-		}
-
-		input[type="range"] {
-            width: 70%;
-            -webkit-appearance: none;
-            background-color: lightgrey;
-            height: 7px;
-            border-radius: 0;
-            outline: none;
-            
-          
-            }
-			input[type="number"]::-webkit-inner-spin-button,
-			input[type="number"]::-webkit-outer-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-			display: none;
-			}
-
-            input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background-color: #2196F3;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 20px #2196F3;
-            }
-
-            #input-number {
-            width: 80px;
-            height: 50px;
-            text-align: center;
-            
-            border: none;
-            outline: none;
-			background-color: transparent;
-			
-			font-size:130%;
-			font-weight: 600;
-			color: white;
-            }
-
-			#double div{
-				border-radius: 25px;
-				width: 130px;
-            	height: 50px;
-				background-color: #2196F3;
-				font-size:130%;
-			font-weight: 600;
-			color: white;
-			display: flex;
-				justify-content: center;
-			align-items: center;
-
-			}
-
-
-
-	</style>
 </head>
 <body>
 	<div class="menu">
@@ -205,13 +75,23 @@
 			<input type="text" id="surname_" name="surname_" required>
 			<label for="father_name">Imie ojca<span style="color:red;">*</span>:</label>
 			<input type="text" id="father_name" name="father_name" required>
-			<form id="double">
-				<input type="text" id="miasto" name="miasto" required>
-			</form>
+			<label for="miasto">Zakład karny / areszt śledczy<span style="color:red;">*</span>:</label>
+
+				
+			<input style="margin-bottom: 0; border-radius: 0;"type="text" id="miasto" name="miasto" required>
+			<div id="wyniki" class="not-visible">
+			</div><br>
 			<div style="margin:5px;"><span style="color:red;">*</span> - pole obowiązkowe do wypełnienia</div>
+<br><br>
+			<div class="more">
+
+				<input style="font-size: 22px; background-color: #2196F3;" class="more-submit" type="submit" value='Zamawiam'>
+			
+		</div>
 		</div>
 
-		<input type="submit" value="Submit">
+
+		
 	</form>
 	<section class="przelewy24">
         <img src="assets/images/przelewy24.png">
@@ -219,6 +99,14 @@
     <footer>ZPOZDROWIENIEM.PL© | 2023© <a href="#"> Polityka prywatności</a><a href="#">Regulamin</a></footer>
     <script src="assets/scripts/script.js"></script>
 	<script>
+						let miasta = ["Wronki, Zakład Karny we Wronkach, Partyzantów 1", "Inowrocław, Zakład Karny w Inowrocławiu, Narutowicza 46", 
+					"Wrocław, Areszt Śledczy we Wrocławiu, Świebodzka 1"
+					];
+			function ClickOn(text){
+				document.querySelector("#wyniki").style.display = "none";
+					document.querySelector("#miasto").value = text;
+					console.log("sf");
+			}
             const inputRange = document.querySelector('#input-range');
             const inputNumber = document.querySelector('#input-number');
 
@@ -230,6 +118,24 @@
             		inputRange.value = parseInt(event.target.value) / 50;
 					console.log(inputRange.value);
             });
+
+			document.querySelector("#miasto").addEventListener("input", function(){
+				document.querySelector("#wyniki").innerHTML = '';
+				
+				if(this.value.length > 2){
+					document.querySelector("#wyniki").style.display = "block";
+					for(let i=0; i<miasta.length; i++){
+						if (miasta[i].toLocaleLowerCase().includes(this.value.toLocaleLowerCase())){
+							console.log(miasta[i]);
+							document.querySelector("#wyniki").innerHTML += `<div onclick='ClickOn("${miasta[i]}")'>${miasta[i]}</div>`;
+						}
+					}
+				}
+				
+			})
+
+				
+
 	</script>
 </body>
 </html>

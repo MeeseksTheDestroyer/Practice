@@ -1,0 +1,185 @@
+body{
+    background-color: aliceblue;
+}
+
+#combined-form{
+    min-height: 72vh;
+}
+.form-section {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.form-section{
+    background-color: white;
+}
+
+.more{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.more div{
+    width: 70%;
+}
+
+.form-section h2 {
+    margin-top: 0;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+/* Styles for input fields */
+.form-section label {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-section input[type="text"],
+.form-section input[type="number"],
+.form-section input[type="email"] {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#price{
+    width: 30%;
+}
+
+#double{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+input[type="range"] {
+    width: 70%;
+    -webkit-appearance: none;
+    background-color: lightgrey;
+    height: 7px;
+    border-radius: 0;
+    outline: none;
+    
+  
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 20px #2196F3;
+    }
+
+    #input-number {
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    
+    border: none;
+    outline: none;
+    background-color: transparent;
+    
+    font-size:130%;
+    font-weight: 600;
+    color: white;
+    }
+
+    #double div{
+        border-radius: 25px;
+        width: 130px;
+        height: 50px;
+        background-color: #2196F3;
+        font-size:130%;
+    font-weight: 600;
+    color: white;
+    display: flex;
+        justify-content: center;
+    align-items: center;
+
+    }
+
+#wyniki{
+    
+    border: 1px solid black;
+}
+
+#wyniki div{
+    margin: 0;
+    padding: 5px;
+}
+
+.not-visible{
+    display: none;
+}
+
+#miasto:focus{
+    outline: none;
+    border-bottom: 2px solid black;
+}
+
+.summary{
+    display: flex;
+    justify-content: space-between;
+}
+
+#wyniki div:hover{
+    background-color: black;
+    color: white;
+}
+
+.more-submit{
+    width: 50%;
+    height: 80px;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+
+@media only screen and (max-width:1200px){
+    .form-section{
+        width: 80%;
+    }
+}
