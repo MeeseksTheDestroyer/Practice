@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            }
+
+            input[type="range"] {
+            width: 80%;
+            -webkit-appearance: none;
+            background-color: #2195f345;
+            height: 20px;
+            border-radius: 10px;
+            outline: none;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px #2196F3;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px #2196F3;
+            }
+
+            #input-number {
+            width: 150px;
+            height: 30px;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            }
+
+    </style>
+</head>
+<body>
+    <form>
+        <label for="input-range">Number Input:</label>
+        <input type="range" id="input-range" name="input-range" min="0" max="100" value="50">
+        <input type="number" id="input-number" name="input-number" min="0" max="100" value="50">
+      </form>
+      <script>
+            const inputRange = document.querySelector('#input-range');
+            const inputNumber = document.querySelector('#input-number');
+
+            inputRange.addEventListener('input', (event) => {
+            inputNumber.value = parseInt(event.target.value) * 50;
+            });
+
+            inputNumber.addEventListener('input', (event) => {
+            inputRange.value = parseInt(event.target.value) / 50;
+            });
+      </script>
+</body>
+</html>

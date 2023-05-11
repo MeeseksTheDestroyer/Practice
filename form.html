@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8" />
 	<title>Combined Form with CSS</title>
 	<link rel="stylesheet" href="assets/styles/style.css">
 	<style>
@@ -8,10 +9,14 @@
 		body{
 			background-color: aliceblue;
 		}
+
+		#combined-form{
+			height: 72vh;
+		}
 		.form-section {
 			display: flex;
 			flex-direction: column;
-			width: 50%;
+			width: 40%;
 			margin: 50px auto;
 			padding: 20px;
 			border: 1px solid #ddd;
@@ -61,6 +66,75 @@
 			box-sizing: border-box;
 		}
 
+		#price{
+			width: 30%;
+		}
+
+		#double{
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			align-items: center;
+		}
+
+		input[type="range"] {
+            width: 70%;
+            -webkit-appearance: none;
+            background-color: lightgrey;
+            height: 7px;
+            border-radius: 0;
+            outline: none;
+            
+          
+            }
+			input[type="number"]::-webkit-inner-spin-button,
+			input[type="number"]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+			display: none;
+			}
+
+            input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px #2196F3;
+            }
+
+            #input-number {
+            width: 80px;
+            height: 50px;
+            text-align: center;
+            
+            border: none;
+            outline: none;
+			background-color: transparent;
+			
+			font-size:130%;
+			font-weight: 600;
+			color: white;
+            }
+
+			#double div{
+				border-radius: 25px;
+				width: 130px;
+            	height: 50px;
+				background-color: #2196F3;
+				font-size:130%;
+			font-weight: 600;
+			color: white;
+			display: flex;
+				justify-content: center;
+			align-items: center;
+
+			}
+
+
+
 	</style>
 </head>
 <body>
@@ -93,33 +167,48 @@
 	<form id="combined-form">
 		<div class="form-section">
 			<h2>Osoba wspierajaca</h2>
-			<label for="name">Imie:</label>
+			<label for="name">Imie<span style="color:red;">*</span>:</label>
 			<input type="text" id="name" name="name" required>
 
-			<label for="surname">Nazwisko:</label>
+			<label for="surname">Nazwisko<span style="color:red;">*</span>:</label>
 			<input type="text" id="surname" name="surname" required>
-			<label for="postnum">Post Number:</label>
+			<label for="postnum">Numer pocztowy<span style="color:red;">*</span>:</label>
 			<input type="number" id="postnum" name="postnum" required>
 
-			<label for="city">City:</label>
+			<label for="city">Miasto<span style="color:red;">*</span>:</label>
 			<input type="text" id="city" name="city" required>
 
-			<label for="phone">Phone Number:</label>
+			<label for="phone">Numer telefonu<span style="color:red;">*</span>:</label>
 			<input type="text" id="phone" name="phone" required>
 
-			<label for="email">Email:</label>
+			<label for="email">Email<span style="color:red;">*</span>:</label>
 			<input type="email" id="email" name="email" required>
+			<label for="input-range">Kwota wypiski<span style="color:red;">*</span>:</label>
+			<div id="double">
+				
+				<input type="range" id="input-range" name="input-range" min="0" max="100" value="50">
+				<div>
+					<input type="number" id="input-number" name="input-number" min="0" max="100" value="2500">
+					<span>zł</span>
+				</div>
+				
 			</div>
-			<div class="form-section">
+			
+		</div>
+		
+		<div class="form-section">
 			<h2>Odbiorca wypiski (osoba osadzona)</h2>
-			<label for="name_">Imie:</label>
+			<label for="name_">Imie<span style="color:red;">*</span>:</label>
 			<input type="text" id="name_" name="name_" required>
 
-			<label for="surname_">Nazwisko:</label>
+			<label for="surname_">Nazwisko<span style="color:red;">*</span>:</label>
 			<input type="text" id="surname_" name="surname_" required>
-			<label for="father_name">Imie ojca:</label>
+			<label for="father_name">Imie ojca<span style="color:red;">*</span>:</label>
 			<input type="text" id="father_name" name="father_name" required>
-
+			<form id="double">
+				<input type="text" id="miasto" name="miasto" required>
+			</form>
+			<div style="margin:5px;"><span style="color:red;">*</span> - pole obowiązkowe do wypełnienia</div>
 		</div>
 
 		<input type="submit" value="Submit">
@@ -127,7 +216,20 @@
 	<section class="przelewy24">
         <img src="assets/images/przelewy24.png">
     </section>
-    <footer>ZPOZDROWIENIEM.PL© | 2023</footer>
+    <footer>ZPOZDROWIENIEM.PL© | 2023© <a href="#"> Polityka prywatności</a><a href="#">Regulamin</a></footer>
     <script src="assets/scripts/script.js"></script>
+	<script>
+            const inputRange = document.querySelector('#input-range');
+            const inputNumber = document.querySelector('#input-number');
+
+            inputRange.addEventListener('input', (event) => {
+            inputNumber.value = parseInt(event.target.value) * 50;
+            });
+
+            inputNumber.addEventListener('input', (event) => {
+            		inputRange.value = parseInt(event.target.value) / 50;
+					console.log(inputRange.value);
+            });
+	</script>
 </body>
 </html>
