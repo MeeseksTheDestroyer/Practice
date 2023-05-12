@@ -2,3 +2,4 @@
 - Wypełanienie strony sensownymi danymi
 - Walidacja formularza w form.php
 - Regulaminy itd.
+- Dodanie wszystkich zakladow karnych do bazy danych
