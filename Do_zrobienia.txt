@@ -1,0 +1,4 @@
+- Płatności
+- Wypełanienie strony sensownymi danymi
+- Walidacja formularza w form.php
+- Regulaminy itd.
