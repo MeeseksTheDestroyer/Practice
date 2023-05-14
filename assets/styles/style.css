@@ -1,20 +1,60 @@
 *{
-    font-family: 'Instrument Sans', sans-serif;
     padding: 0;
     margin: 0;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.list{
+
+    font-size: 120%;
+    width: 40%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color:black;
+}
+
+.list a{
+    color:black;
+}
+
+.container-absolute{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 8;
+    background: transparent;
+}
+
+.menu{
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    position: absolute;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+    display: none;
     
 }
-html {
-    scroll-behavior: smooth;
-  }
-
-body{
-    min-width: 100%;
-    min-height: 100%;
+.header-show{
+    position: absolute;
+    top: 5vh;
+    width: 100%;
+    z-index: 8;
 }
+.show{
+    display: flex;
+}
+
 nav{
     display: flex;
     justify-content: space-around;
+}
+a{
+    text-decoration: none;
 }
 
 .top{
@@ -74,7 +114,7 @@ header nav{
     display: inline-block;
     position: relative;
     cursor: pointer;
-
+    color: white;
   }
   
 .hover-underline-animation::after {
@@ -95,134 +135,156 @@ header nav{
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
-main{
-    width: 100%;
-    min-height: 80vh;
-}
-
-.image{
-    border-radius: 122px 18px 150px 0px;
-    background-image: url("..//images/prezent-podarunek-prezenty.jpg");
-    width: 70%;
-    height: 110%;
-    background-position: center;
-    -webkit-box-shadow: 8px 8px 38px 15px rgba(255, 255, 255, 1);
-    -moz-box-shadow: 8px 8px 38px 15px rgba(255, 255, 255, 1);
-    box-shadow: 8px 8px 38px 15px rgb(97, 97, 97);
-}
-
-.main-image{
-    width: 61%;
-    display: flex;
-    justify-content: flex-end;
-
-}
-
-main{
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.main-about-us{
-    width: 100%;
-   
-    
-}
-
-.main-container section{
-    width: 39%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-right: 1%;
-    
-}
-
-.list{
-
-    font-size: 120%;
-    width: 40%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.menu{
-    width: 100%;
-    height: 100%;
-    background-color: aliceblue;
-    position: absolute;
-    z-index: 2;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    
-}
-.header-show{
-    position: absolute;
-    z-index: 4;
-}
-.show{
-    display: flex;
-}
-
-.quest{
-    font-size: 2rem;
-
-    font-family: 'Pacifico', cursive;
-}
-.about-us-content{
-    font-size: 115%;
-}
-
-
-.main-container{
-    width: calc(100vw - (30vw - 186px));
-    display: flex;
-    justify-content: center;
-}
-
-.transparency{
-    font-family: 'PT Serif', serif;
-    font-size: 140%;
-    color: rgba(0, 0, 0, 0.407);
-}
-.btn {
-    text-decoration: none;
-    
-    color: white;
-    padding: 12px 55px;
-    font-size: larger;
-    background-color: #0087ca;
-    border-radius: 6px;
-}
-
-.btn:hover{
-    background-color: #00aaff;
-}
 .icon-menu{
     display: none;
     cursor: pointer;
+   
+}
+
+.nav a{
+    color: white;
+}
+
+.slider-img{
+    width: 100%;
+    height:80vh;
+    background-color: red;
+    filter: brightness(90%);
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://www.zakladykarne.pl/wp-content/uploads/2020/05/wiezienie_zaklad_karny_kara_pozbawienia_wolnosci_zpozdrowieniem_wypiska_paczka_zywnosciowa_2_ciemne.jpg);
+}
+
+.logo-white{
+    filter: invert(100%);
+}
+
+.title{
+    height: 55%;
+    display: flex;
+    justify-content:center;
+    align-items:flex-end;
+    background:transparent;
+    color: white;
+  
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+  
+    letter-spacing: 3.5px;
+}
+
+.blue{
+    background-color: #0087ca;
+}
+
+.title h2{
+    text-align: center;
+    width: 100%;
+    font-size: 4rem;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.title div div {
+    text-align: center;
+    width:100%;
+    font-size: 2rem;
+    color: white;
+    letter-spacing: normal;
+}
+.buttons{
+    width: 100%;
+    height: 45%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap: wrap;
 
 }
 
-footer{
-    width: 100%;
-    height: 7vh;
-    text-align: center;
+.buttons a{
+    margin: 5px;
+}
+
+.buttons a{
+
+    font-size: 130%;
+    height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
+    align-items:center;
+    justify-content:center;
+    width: 250px;
+    border-radius: 5px;
+    color: black;
+}
+
+.buttons a:hover{
+    filter: brightness(125%);
+}
+
+.buttons a:nth-of-type(1):hover{
+    filter: brightness(75%);
+}
+
+
+
+.buttons a:nth-of-type(1){
+    text-align: center;
+    
+    background-color: white;
+    
+
+}
+
+.buttons a:nth-of-type(2){
+
+    text-align: center;
+    
     color: white;
+    background-color: #0087ca;
+}
+
+.about-us{
+    width: 100%;
+    min-height: 30vh;
+    padding: 60px 0px 60px 0px;
+}
+
+.about-us h1{
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3.5px;
+    padding: 0px 0px 20px 0px;
+}
+
+.blue-mark{
+    color:#0087ca ;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3.5px;
+}
+
+.white-mark{
+    color:white ;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3.5px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red-mark{
+    width: 80px;
+    height: 3px;
+    background-color: #e3ca2a;
+}
+
+.center-a{
+    width: 70%;
+    font-size: 1.88rem;
 }
 .info-container{
     width:100%;
@@ -231,10 +293,11 @@ footer{
     justify-content:center;
     align-items: center;
     overflow:visible;
-    min-height:40vh;
-    padding-top:0vh;
-    padding-bottom:13vh;
+    min-height:30vh;
+    padding-top:60px;
+        padding-bottom: 60px;
     color: black;
+    background-color: #0087ca;
 }
 
 .questions{
@@ -244,12 +307,33 @@ footer{
 
 
 .question{
-    border-bottom:.5px solid gray;
+    border-bottom:.5px solid white;
     width:100%;
     color:black;
     padding-bottom:11px;
     padding-top:11px;
-    cursor:pointer
+    cursor:pointer;
+    color: white;
+}
+
+.quest-mark{
+    width: 100%;
+    background-color: #0087ca;
+}
+
+.white{
+    width: 100%;
+    background-color: white;
+}
+
+
+.quest-mark h1{
+    text-align: center;    
+    font-size: 2.5rem;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3.5px;
+    padding-bottom: 20px;
+    padding-top: 60px;
 }
 
 .question-description{
@@ -291,20 +375,15 @@ footer{
     animation: rotation 0.2s linear;
 }
 
-.title{
-    width: 100%;
-    font-size: 2.2rem;
-    text-align: center;
-    font-family: 'Pacifico', cursive;
-    margin-bottom: 45px;
-    margin-top: 85px;
-}
 
 .advantages{
+    min-height:30vh;
+    padding-top:60px;
+        padding-bottom: 60px;
     width: 100%;
     display: flex;
     justify-content: center;
-
+    font-family: 'Instrument Sans', sans-serif;
 }
 
 .advantages-container{
@@ -354,26 +433,32 @@ footer{
     padding-top: 35px;
     padding-bottom: 35px;
 }
-
+footer{
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
 footer a{
     margin: 5px;
     color: white;
 }
 
-nav a{
-    text-decoration: none;
-    color: black;
-}
 
-.list a{
-    text-decoration: none;
-    color: black;
+.mark-border{
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #0087ca;
+    margin: 0px 10px 0px 10px;
+    font-family: 'Oswald', sans-serif;
+   
+    font-size: 2.5rem;
+  
+    letter-spacing: 3.5px;
 }
-
-a{
-    text-decoration: none;
-}
-
 @keyframes rotation {
     from {
       transform: rotate(0deg);
@@ -449,6 +534,83 @@ a{
     main{
         min-height: 120vh;
     }
+
+    header div img{
+        height: 40px;
+    }
+}
+
+@media only screen and (max-width:500px){
+    .title{
+        height: 70%;
+    }
+
+    .buttons{
+
+        height: 30%;
+
+    
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .main-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title h2{
+ 
+        font-size: 2.5rem;
+
+    }
+    
+    .title div div {
+
+        font-size: 1.5rem;
+
+    }
+
+    .main-image{
+        width: 100%;
+        justify-content: center;
+        width: 450px;
+        height: 300px;
+    }
+
+    .main-container section{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 0;
+    }
+
+    .main-container section .main-about-us{
+        padding: 25px;
+    }
+    .top div:nth-of-type(1){
+        width: 100%;
+        text-align: center;
+    }   
+    .top div:nth-of-type(2){
+        display: none;
+    }
+    .icon-menu{
+        display: block;
+    }
+    .hover-underline-animation{
+        display: none;
+    }
+    header div{
+        width: 50%;
+        justify-content: center;
+    }
+
+    header nav{
+        width: 50%;
+        justify-content: center;
+    }
+
 
     header div img{
         height: 40px;
