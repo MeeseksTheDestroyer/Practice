@@ -1,5 +1,7 @@
 
-  
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap" rel="stylesheet">
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap" rel="stylesheet">
   <title>Product Quantity Form</title>
   <style>
@@ -23,12 +25,23 @@
       margin: 0;
     }
 
+    form{
+      width: 100%;
+      display:flex;
+      justify-content: center;
+      
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
     .product-container {
       display: flex;
+      overflow: hidden;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: 100%;
+
     }
 
     .product-form {
@@ -39,7 +52,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       margin-bottom: 10px;
-      width: 350px;
+      width: 85%;
     }
 
     .product-info {
@@ -95,6 +108,7 @@
       font-size: 16px;
       border-radius: 3px;
       cursor: pointer;
+      width: 100%;
     }
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -102,10 +116,66 @@
       margin: 0;
     }
 
+    .summary{
+      margin: 10px;
+      margin-left: 30px;
+      width: 350px;
+    }
+
     .add-to-cart-btn:hover {
       background-color: #45a049;
     }
+
+    .price{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   </style>
+  <script>
+
+    $(document).ready(function(){
+      let productIDs = [];
+        let quantities = [];
+
+        $('.quantity').each(function() {
+          let productName = $(this).attr("name");
+          let quantity = parseInt($(this).val());
+
+          // Add the product ID and quantity to the arrays
+          productIDs.push(productName);
+          quantities.push(quantity);
+        });
+        console.log(productIDs);
+
+        // Create an object to send to the server
+        var data = {
+          productIDs: productIDs,
+          quantities: quantities
+        };
+
+        // Send the data to the server
+        $.ajax({
+          type: 'POST',
+          url: 'kosz.php', // Specify the server-side script URL
+          data: data,
+          dataType: 'json',
+          success: function(response) {
+            // Retrieve the calculated total price from the server response
+            let totalPrice = response.totalPrice;
+
+
+            // Display the total price
+            $('#cena').text(totalPrice + 'zł');
+          },
+          error: function(xhr, status, error) {
+            // Handle the error case
+            console.log('Error:', error);
+          }
+        });
+      }
+    )
+  </script>
 </head>
 <body>
 <div class="menu">
@@ -134,7 +204,7 @@
             <svg class="icon-menu" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
         </nav>
     </header>
-    <form action="" method="POST">
+    <form action="calculate-price.php" method="POST">
       <div class="product-container">
 
         <?php
@@ -142,6 +212,7 @@
           $CHECK = true;
           $header = null;
           $all_data = array();
+          $prices_arr = array();
           if (($handle = fopen($filePath, 'r')) !== false) {
             while (($data = fgetcsv($handle)) !== false) {
               if($CHECK){
@@ -153,6 +224,9 @@
                 $ilosc = $data[2];
                 $cena = $data[15];
                 $nazwa = $data[0];
+
+                $prices_arr[$nazwa] = (float)$cena;
+
                 if($data[2] > 0){
                   ECHO "<div class='product-form'>
                   <div class='product-info'>
@@ -161,7 +235,7 @@
                   </div>
                   <div class='quantity-input'>
                     <div  onclick='decreaseQuantity()'>-</div>
-                    <input type='number' id='quantity' value='0' min='0' max='$ilosc'>
+                    <input type='number' name='$nazwa' class='quantity' value='0' min='0' max='$ilosc'>
                     <div onclick='increaseQuantity()'>+</div>
                   </div>
                 </div>";
@@ -175,58 +249,137 @@
             echo "Failed to open the file: $filePath";
           }
 
-          echo ($all_data[0][0]);
+         
     
     ?>
-      <div class="product-form">
-        <div class="product-info">
-          <div class="product-name">Product 2</div>
-          <div class="product-price">$14.99</div>
-        </div>
-        <div class="quantity-input">
-          <div type="button" onclick="decreaseQuantity()">-</div>
-          <input type="number" id="quantity" value="0" min="0">
-          <div type="button" onclick="increaseQuantity()">+</div>
-        </div>
+    </div> 
+    <div class="summary">
+      <div class='product-name' style="font-size: 23px;">Podsumowanie</div><br>
+      <div class='product-price'>Metoda płatności - Przelewy24<br>
+        Szybki przelew / BLIK / karta płatnicza <br>
+      </div><br>
+        <div class="price">
+        <div class='product-name'>Do zapłaty</div><div class='product-name' id="cena">0 zł</div>
       </div>
-
-      <div class="product-form">
-        <div class="product-info">
-          <div class="product-name">Product 3</div>
-          <div class="product-price">$19.99</div>
-        </div>
-        <div class="quantity-input">
-          <div type="button" onclick="decreaseQuantity()">-</div>
-          <input type="number" id="quantity" value="0" min="0">
-          <div type="button" onclick="increaseQuantity()">+</div>
-        </div>
-      </div>
+      <button class="add-to-cart-btn" type="submit">Add to Cart</button>      
     </div>
     </form>
 
 
-  <button class="add-to-cart-btn" type="submit">Add to Cart</button>
+  
   <section class="przelewy24">
         <img src="assets/images/przelewy24.png">
     </section>
     <footer><a>ZPOZDROWIENIEM.PL© | 2023</a><a href="#"> Polityka prywatności</a><a href="#">Regulamin</a></footer>
     <script src="assets/scripts/script.js"></script>
   <script>
+    var price = 0;
     function decreaseQuantity() {
       const quantityInput = event.target.nextElementSibling;
       let quantity = parseInt(quantityInput.value);
       if (quantity >= 1) {
         quantity--;
         quantityInput.value = quantity;
+
+        
+        let productIDs = [];
+        let quantities = [];
+
+        $('.quantity').each(function() {
+          let productName = $(this).attr("name");
+          let quantity = parseInt($(this).val());
+
+          // Add the product ID and quantity to the arrays
+          productIDs.push(productName);
+          quantities.push(quantity);
+        });
+        console.log(productIDs);
+
+        // Create an object to send to the server
+        var data = {
+          productIDs: productIDs,
+          quantities: quantities
+        };
+
+        // Send the data to the server
+        $.ajax({
+          type: 'POST',
+          url: 'kosz.php', // Specify the server-side script URL
+          data: data,
+          dataType: 'json',
+          success: function(response) {
+            // Retrieve the calculated total price from the server response
+            let totalPrice = response.totalPrice;
+            price = totalPrice;
+            // Display the total price
+            $('#cena').text(totalPrice + 'zł');
+          },
+          error: function(xhr, status, error) {
+            // Handle the error case
+            console.log('Error:', error);
+          }
+        });
       }
-    }
+      }
+    
 
     function increaseQuantity() {
       const quantityInput = event.target.previousElementSibling;
       let quantity = parseInt(quantityInput.value);
-      quantity++;
-      quantityInput.value = quantity;
+      if(quantity+1 <= quantityInput.max) 
+      {
+        quantity++;
+        quantityInput.value = quantity;
+        let productIDs = [];
+        let quantities = [];
+
+        $('.quantity').each(function() {
+          let productName = $(this).attr("name");
+          let quantity = parseInt($(this).val());
+
+          // Add the product ID and quantity to the arrays
+          productIDs.push(productName);
+          quantities.push(quantity);
+        });
+        console.log(productIDs);
+
+        // Create an object to send to the server
+        var data = {
+          productIDs: productIDs,
+          quantities: quantities
+        };
+
+        // Send the data to the server
+        $.ajax({
+          type: 'POST',
+          url: 'kosz.php', // Specify the server-side script URL
+          data: data,
+          dataType: 'json',
+          success: function(response) {
+            // Retrieve the calculated total price from the server response
+            let totalPrice = response.totalPrice;
+            price = totalPrice;
+            // Display the total price
+            $('#cena').text(totalPrice + 'zł');
+          },
+          error: function(xhr, status, error) {
+            // Handle the error case
+            console.log('Error:', error);
+          }
+        });
+      }
+
     }
+
+    document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Zapobiega domyślnemu zachowaniu formularza
+
+    if (price > 0) {
+      this.submit();
+    } 
+  });
+
+    
   </script>
 </body>
 </html>
