@@ -94,7 +94,7 @@
 
 				<input style="font-size: 22px; background-color: #2196F3;" name="submit" class="more-submit" type="submit" value='Zamawiam'>
 			
-		</div>
+			</div>
 		</div>
 
 
@@ -183,7 +183,7 @@
 		];
 
 		function CheckRegPrison($WhereExp){
-			$conn = mysqli_connect('localhost', 'root' , "", 'practice_tst');
+			$conn = mysqli_connect('localhost', 'root' , "zsk", 'practice_tst');
 
 			if (!mysqli_connect_errno()) {
 				$WhereExp = mysqli_real_escape_string($conn, $WhereExp);

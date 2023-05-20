@@ -58,6 +58,7 @@ session_start();
   
               }
             $_SESSION["KOSZYK"] = $purchase;
+            $_SESSION["PRICE"] = $totalPrice;
            $response = array('totalPrice' => $totalPrice);
               echo json_encode($response);
           }
