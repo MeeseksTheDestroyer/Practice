@@ -2,6 +2,36 @@
 <?php
 session_start();
 ?>
+<?php
+		function CheckRegPrison($WhereExp){
+			$conn = mysqli_connect('localhost', 'root' , "zsk", 'practice_tst');
+
+			if (!mysqli_connect_errno()) {
+				$WhereExp = mysqli_real_escape_string($conn, $WhereExp);
+				$SQL_QUERY_CHECKER = "SELECT ID, opis FROM zaklady where opis = '$WhereExp'";
+				$response = mysqli_query($conn, $SQL_QUERY_CHECKER);
+				if(mysqli_num_rows($response) == 1){
+					mysqli_close($conn);
+					return true;
+				}
+				else{
+					mysqli_close($conn);
+					return false;
+				} 
+
+				
+			}
+			mysqli_close($conn);
+
+		}
+		if(isset($_POST['city_']) and CheckRegPrison($_POST['city_'])){
+			
+		} else{
+			// Redirect to a specific URL
+			
+			header("Location: wybor.php");
+		}
+	?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,10 +234,12 @@ session_start();
             <svg class="icon-menu" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
         </nav>
     </header>
-    <form action="paczki.php" method="POST">
+    <form action="paczki.php" method = "POST">
       <div class="product-container">
 
         <?php
+        $zaklad = $_POST['city_'];
+        echo "<input type='hidden' name='city_' value='$zaklad' >";
           $filePath = 'Artykuły-przeglądanie_20230516.csv';
           $CHECK = true;
           $header = null;
