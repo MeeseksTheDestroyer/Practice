@@ -14,11 +14,13 @@
 					$arr[] = $row['opis'];
 				}
 			}
+
+            
 	
 
 			
 		}
-		mysqli_close($conn);
+		
 	?>
 
 <!DOCTYPE html>
@@ -67,14 +69,26 @@
         </nav>
     </header>
 
-    <form id="form" action="artykuly.php" method="POST">
+    <form style="height:60vh;" id="form" action="artykuly.php" method="POST">
 
         <div class="form-section">
-        <h2 style="text-align:center;">Wyślij paczke dla osadzonego</h2><br>
-        <label for="name">Zaklad karny: </label>
-        <input placeholder="Nazwa miasta / ulicy / zaklady karnego" style="margin-bottom: 0; border-radius: 0;"type="text" id="miasto" name="city_" required>
-			<div id="wyniki" class="not-visible">
-			</div><br>
+            <h2 style="text-align:center;">Wyślij paczke dla osadzonego</h2><br>
+            <label for="name">Zaklad karny: </label>
+            <input placeholder="Nazwa miasta / ulicy / zaklady karnego" style="margin-bottom: 0; border-radius: 0;"type="text" id="miasto" name="city_" required>
+                <div id="wyniki" class="not-visible">
+                </div><br>
+                <?php
+                    $res = mysqli_query($conn, "SELECT opis from zaklady limit 5");
+                    if(mysqli_num_rows($res) > 0){
+                        while($row = mysqli_fetch_assoc($res)){
+                            $opis=$row["opis"];
+                            $with = "'$opis'";
+                            echo "<div class='popular-city' onclick=\"ClickOn('$opis')\" style='display: flex; align-items:center; text-decoration: underline; cursor:pointer;'><div style='width:6px; margin:5px;height:6px; border-radius:50%; background-color:black;'></div>$opis</div>";
+                        }
+                    }
+
+                    mysqli_close($conn);
+                ?>
         </div>
 
 </form>
