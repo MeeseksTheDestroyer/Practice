@@ -1,2 +1,5 @@
 RewriteEngine On
 RewriteRule ^wypiska$ form.php [L]
+RewriteRule ^paczki$ wybor.php [L]
+RewriteRule ^zamowienie$ artykuly.php [L]
+RewriteRule ^zamow$ paczki.php [L]
