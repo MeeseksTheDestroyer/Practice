@@ -24,11 +24,12 @@
 
 		}
 		if(isset($_POST['city_']) and CheckRegPrison($_POST['city_'])){
-			
+			$CITY_FLOP = $_POST['city_'];
 		} else{
 			// Redirect to a specific URL
 			
 			header("Location: zamowienie");
+			exit();
 		}
 	?>
 <!DOCTYPE html>
@@ -132,10 +133,11 @@ canvas{
     </header>
 
 
-	<form id="combined-form" action="" method="post">
+	<form id="combined-form" action="" method="POST">
         <div>
 		<div class="form-section">
 			<h2>Osoba wspierajaca</h2>
+			<input type="hidden" name="city_" value="<?php echo $CITY_FLOP ?>">
 			<label for="name">Imie<span style="color:red;">*</span>:</label>
 			<input type="text" id="name" name="name" pattern="[A-Za-z]{2,50}" required>
 
@@ -192,7 +194,7 @@ canvas{
         } else echo -1;
          ?>zł</div>
       </div>
-      <button class="add-to-cart-btn" type="submit">Add to Cart</button>      
+      <input class="add-to-cart-btn" type="submit" name="sub">      
     </div>
 
 		
@@ -204,15 +206,15 @@ canvas{
 	<script>
 
 		function isCanvasEmpty(canvas) {
-		var context = canvas.getContext("2d");
+		let context = canvas.getContext("2d");
 
 		// Get the pixel data from the canvas
-		var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-		var pixelData = imageData.data;
+		let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+		let pixelData = imageData.data;
 
 		// Check if all pixel values are transparent or have an alpha value of 0
-		for (var i = 0; i < pixelData.length; i += 4) {
-			var alpha = pixelData[i + 3];
+		for (let i = 0; i < pixelData.length; i += 4) {
+			let alpha = pixelData[i + 3];
 			if (alpha !== 0) {
 			return false;
 			}
@@ -258,19 +260,21 @@ canvas{
 		isDrawing = false;
 		}
 
-		const formSe = document.getElementById('combined-form');
-		formSe.addEventListener('submit', function(){
+		let formSe = document.getElementById('combined-form');
+		formSe.addEventListener('submit', function(event){
 				event.preventDefault();
-				var canvas = document.getElementById("canvas");
-			var dataURL = canvas.toDataURL();
+				let canvas = document.getElementById("canvas");
+			let dataURL = canvas.toDataURL();
 			if(!isCanvasEmpty(canvas)){
-				
+				document.querySelector("#canvasData").value = dataURL;
 				console.log(dataURL);
 		
-				createPDFWithImage(canvas);
-				document.querySelector("#canvasData").value = dataURL;
-				this.submit;
+				console.log(this);
+				
+				this.submit();
+				
 			}
+			else alert("Nie ma zad");
 
 		
 
@@ -296,7 +300,7 @@ canvas{
   doc.save('document.pdf');
 };
 	</script>
-    <script src="assets/scripts/script.js"></script>
+    
 
 
 	<?php
@@ -326,7 +330,8 @@ canvas{
 			}
 			return true;
 		}
-		if(isset($_POST['submit'])){
+		if(isset($_POST['name'])){
+			echo "<script>alert('Maka paka fa');</script>";
 			$POSTS_TAB = [
 				$_POST['name'], 
 				$_POST['name_'], 
@@ -339,7 +344,7 @@ canvas{
 				$_POST['phone']
 
 			];
-			if(CheckAllValues($POSTS_TAB, $RegExps) and $_SESSION["PRICE"] > 0 and $_SESSION["PRICE"] < 9000 and CheckRegPrison($_GET['city_'])){
+			if(CheckAllValues($POSTS_TAB, $RegExps) and $_SESSION["PRICE"] > 0 and $_SESSION["PRICE"] < 9000 and CheckRegPrison($_POST['city_'])){
 				
 				//Json_config - json do wysłania
 				$json_config['imie'] = $_POST['name'];
@@ -369,6 +374,6 @@ canvas{
 				- Wypełanienie strony sesownymi danymi
 				- Regulaminy itd.
 -->
-
+<script src="assets/scripts/script.js"></script>
 </body>
 </html>
