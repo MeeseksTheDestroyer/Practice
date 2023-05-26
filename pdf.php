@@ -37,7 +37,8 @@ function CheckRegPrison($WhereExp){
 			'/^(?=.*[\p{L}])[A-Za-z\p{L}\s]{2,50}$/u',
 			'/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/',
 			'/^(?=.*\d)\d{9}$/',
-			'/^[\p{L}]{3,50}$/u'
+			'/^[\p{L}]{3,50}$/u',
+			'/^[\p{L}\d\s.,-]{3,}$/u'
 		];
 
 
@@ -50,8 +51,19 @@ function CheckRegPrison($WhereExp){
 			}
 			return true;
 		}
-		if(isset($_POST['city_']) and isset($_POST['canvasData']) and isset($_POST['family']) and isset($_POST['phone']) and isset($_POST['email']) and isset($_POST['city']) and isset($_POST['name']) and isset($_POST['name_']) and isset($_POST['surname']) and isset($_POST['surname_']) and isset($_POST['father_name']) and isset($_POST['postnum'])){
-			echo "<script>alert('Maka paka fa');</script>";
+		if(isset($_POST['birthday']) and isset($_POST['adres']) and isset($_POST['city_']) and isset($_POST['canvasData']) and isset($_POST['family']) and isset($_POST['phone']) and isset($_POST['email']) and isset($_POST['city']) and isset($_POST['name']) and isset($_POST['name_']) and isset($_POST['surname']) and isset($_POST['surname_']) and isset($_POST['father_name']) and isset($_POST['postnum'])){
+			$postnum = $_POST['postname'];
+			$city=$_POST['city'];
+			$name = $_POST['name'];
+			$sur = $_POST['surname'];
+			$father = $_POST['father_name'];
+			$family = $_POST['family'];
+			$tel = $_POST['phone'];
+			$adr = $_POST['adres'];
+			$name_ = $_POST['name_'];
+			$sur_ = $_POST['surname_'];
+			$brd_ = $_POST['birthday'];
+			$prison = $_POST['city_'];
 			$POSTS_TAB = [
 				$_POST['name'], 
 				$_POST['name_'], 
@@ -62,7 +74,8 @@ function CheckRegPrison($WhereExp){
 				$_POST['city'],
 				$_POST['email'], 
 				$_POST['phone'],
-				$_POST['family']
+				$_POST['family'],
+				$_POST['adres']
 			];
 			if(CheckAllValues($POSTS_TAB, $RegExps) and $_SESSION["PRICE"] > 0 and $_SESSION["PRICE"] < 9000 and CheckRegPrison($_POST['city_']) and str_starts_with($_POST["canvasData"], "data:image/png;base64")){
 				
@@ -77,6 +90,7 @@ function CheckRegPrison($WhereExp){
 				$json_config['email'] = $_POST['email'];
 				$json_config['telefon'] = $_POST['phone'];
 				$url = $_POST["canvasData"];
+
 				$arr = [["Mleko", "2", "3", "34.44", "wart", "23"]];
 				$waga = 0.0;
 				$sum = 0.0;
@@ -109,53 +123,17 @@ function CheckRegPrison($WhereExp){
 				
 				   
 
-						$html = "
-						<!DOCTYPE html>
-						<html lang='pl'>
-						<head>
-							<meta charset='UTF-8'>
-							<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-							<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-							<title>Document</title>
-							<style>
-				 
-					*{
-						line-height:90%;
-						font-size:90%;
-					}
-				
-								body{
-									padding-left: 50px;
-									padding-right: 50px;
-								}
-				
-								.bolder{
-									font-weight: bolder;
-								}
-							</style>
-						</head>
-						<body>
-							<h1 style='text-decoration: underline; text-align: center;'>ZAMÓWIENIE NA PACZKĘ</h1>
-							<div style='padding: 5px 0px 5px 0px;'>realizowaną w punkcie sprzedaży prowadzonym przy <strong class='bolder'>Zakładzie Karnym we Wronkach</strong></div>
-							<div  style='padding: 5px 0px 5px 0px; display:flex; align-items:center;'>Numer konta punktu sprzedaży:<h4 style='font-weight: 600;'>63 1610 1146 2000 0120 5871 0004</h4></div>
-							<div  style='padding: 5px 0px 5px 0px;'>Bank Spółdzielczy SGB - Spółdzielcza Grupa Bankowa</div>
-							<h4 style='text-align: center; height: 30pt;'>(Tytuł: ZK Wronki – paczka żywnościowa dla: [imię, nazwisko, imię ojca, data urodzenia)</h4>
-							<h4 style='text-align: center;'>E-mail: epaczki.wronki@pomet-wronki.com.pl</h4>
-							Dane sporządzającego zamówienie (osoba najbliższa dla skazanego):
-						</body>
-						</html>
-						";
 				
 				
 						
 				
 						// Create a new mPDF instance
 						$mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
-				
+						$date = date('d-m-Y');
 						$wronki = "Zakładzie Karnym we Wronkach";
 						// Set PDF content
 						$mpdf->WriteHTML("<h1 style='text-decoration: underline;  line-height: 0.1; text-align: center;'>ZAMÓWIENIE NA PACZKĘ</h1>
-						<div style=' height:1mm;'>realizowaną w punkcie sprzedaży prowadzonym przy <strong class='bolder'>$wronki</strong></div>
+						<div style=' height:1mm;'>realizowaną w punkcie sprzedaży prowadzonym przy <strong class='bolder'>$prison</strong></div>
 						<div  style='height:0.25cm;'>Numer konta punktu sprzedaży: <strong >63 1610 1146 2000 0120 5871 0004</strong></div>
 						<div  style=' height:0.25cm;'>Bank Spółdzielczy SGB - Spółdzielcza Grupa Bankowa</div>
 						<h4 style='text-align: center;  line-height: 0.3'>(Tytuł: ZK Wronki – paczka żywnościowa dla: [imię, nazwisko, imię ojca, data urodzenia)</h4>
@@ -169,18 +147,18 @@ function CheckRegPrison($WhereExp){
 							<td style='text-align:center; border: 2px solid black; padding: 5px;'>Stopień pokrewieństwa</td>
 						</tr>
 						<tr>
-							<td style='border: 2px solid black; text-align:center; padding: 5px;'>Row 1, Column 1</td>
-							<td style='border: 2px solid black; text-align:center; padding: 5px;'>Row 1, Column 2</td>
-							<td style='border: 2px solid black; text-align:center; padding: 5px;'>Row 1, Column 3</td>
-							<td style='border: 2px solid black; text-align:center; padding: 5px;'>Row 1, Column 4</td>
+							<td style='border: 2px solid black; text-align:center; padding: 5px;'>$name</td>
+							<td style='border: 2px solid black; text-align:center; padding: 5px;'>$sur</td>
+							<td style='border: 2px solid black; text-align:center; padding: 5px;'>$father</td>
+							<td style='border: 2px solid black; text-align:center; padding: 5px;'>$family</td>
 						</tr>
 						<tr>
 							<td colspan='3' style='border: 2px solid black; border-right-width: 1px; padding: 3px;'>Adres zamieszkania:</td>
 							<td style='border: 2px solid black; padding: 3px;'>Nr telefonu (opcjonalne)</td>
 						</tr>
 						<tr>
-							<td colspan='3' style='border: 1px solid black; border-right-width: 1px; padding: 3px;'>Adres zamieszkania:</td>
-							<td style='border: 1px solid black; padding: 3px;text-align:center;'>Row 3, Column 4</td>
+							<td colspan='3' style='border: 1px solid black; border-right-width: 1px; padding: 3px;'>$adr</td>
+							<td style='border: 1px solid black; padding: 3px;text-align:center;'>$tel</td>
 						</tr>
 					</table><br>
 					<p style='text-align:center; line-height: 0.05;'>Dane obiorcy paczki (skazany):</p>
@@ -193,10 +171,10 @@ function CheckRegPrison($WhereExp){
 						</tr>
 				
 						<tr>
-						<td style='text-align:center;   border: 1px solid black; padding: 3px;'>Imię</td>
-						<td style='text-align:center;   border: 1px solid black; padding: 3px;'>Nazwisko</td>
-						<td style='text-align:center;  border: 1px solid black; padding: 3px;'>Imię ojca</td>
-						<td style='text-align:center; border: 1px solid black; padding: 3px;'>Data urodzenia</td>
+						<td style='text-align:center;   border: 1px solid black; padding: 3px;'>$name_</td>
+						<td style='text-align:center;   border: 1px solid black; padding: 3px;'>$sur_</td>
+						<td style='text-align:center;  border: 1px solid black; padding: 3px;'>$father</td>
+						<td style='text-align:center; border: 1px solid black; padding: 3px;'>$brd_</td>
 						</tr>
 					</table><br>
 					<p style='text-align:center; line-height: 0.05;'>Lista produktów:</p>
@@ -224,10 +202,13 @@ function CheckRegPrison($WhereExp){
 				</table>
 					<div style='text-align:right; width:100%;'>
 					<div style='width: 55%; float:left; visibility:hidden;'>fd</div>
-					<div style='width:45%  ;float:left; text-align:right; padding: 20px 0px 40px 0px; border-bottom: 2px dotted black;'>Data i podpis Zamawiającego</div>
-				
+					<div style='width:45%  ;float:left; text-align:right; padding: 20px 0px 5px 0px; '>Data i podpis Zamawiającego</div>
+
 					</div>
-					<div style='margin:40px 0px 0px 0px; border-top: 2px solid black; padding: 20px 0px 20px 0px; text-align:center;'>
+					<div style='float: left; text-align:right;'>$date</div>
+					<img width='200px' height='100px' style='float: right;' src='$url'>
+					
+					<div style='margin:80px 0px 0px 0px; border-top: 2px solid black; padding: 20px 0px 20px 0px; text-align:center;'>
 							Potwierdzenie odbioru paczki
 					</div>
 					<div style='text-align:right; width:100%;'>
@@ -241,11 +222,11 @@ function CheckRegPrison($WhereExp){
 					organizacyjno-porządkowego wykonywania tymczasowego aresztowania i regulaminu organizacyjno-porządkowego wykonywania kary pozbawienia wolności.
 					</li>
 					<li>Zamówienie na paczkę należy dostarczyć:<br>
-						<a style='padding: 0px 0px 0px 5px;'>   1. Droga pocztową: <strong>Zakład Karny we Wronkach ul. Partyzantów 1, 64-510 Wronki</strong></a>
+						<a style='padding: 0px 0px 0px 5px;'>   1. Droga pocztową: <strong>$prison</strong></a>
 					</li>
 				
 					<li>
-					Zamówienie sporządza się na podstawie listy produktów obowiązującej dla Zakładu Karnego we Wronkach. Paczka. Osoba zamawiająca paczkę żywnościową 
+					Zamówienie sporządza się na podstawie listy produktów obowiązującej dla $prison. Paczka. Osoba zamawiająca paczkę żywnościową 
 					winna uwzględnić zapis art. 110 a §3 kkw, zgodnie z którym, osadzony może posiadać w celi mieszkalnej artykuły żywnościowe o ciężarze nie przekraczającym 
 					6 kg + 9 l napojów.
 					</il>
@@ -267,11 +248,11 @@ function CheckRegPrison($WhereExp){
 					<div style='padding-left: 20px;width: 100%; text-align:left;'>
 						<h4  style='text-decoration:underline; text-align:left;'>Przekazem pocztowym na adres:</h4>
 						<div style='border-bottom: 2px dotted black;  width: 75%; text-align: left;'>
-							fdfd
+							$name $sur
 						</div>
 						(Imię i nazwisko)<br><br>
 						<div style='border-bottom: 2px dotted black;  width: 75%; text-align: left;'>
-						fdfd
+						$adr $postnum $city
 						</div>
 						(Dokładny adres, kod pocztowy, nazwa ulicy, numer domu, numer mieszkania)<br>
 						<h4  style='text-decoration:underline; text-align:left;'>Przelewem na konto bankowe:</h4>

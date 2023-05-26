@@ -159,6 +159,8 @@ canvas{
 			<input type="email" id="email" name="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}" required>
 			<label for="family">Kim jesteś dla osoby osadzonej<span style="color:red;">*</span>:</label>
 			<input type="text" id="family" name="family" pattern="[\p{L}]{3,50}" placeholder="np. żona, mąż, brat" required>
+			<label for="adres">Adres zamieszkania<span style="color:red;">*</span>:</label>
+			<input type="text" id="adres" name="adres" pattern="^[\p{L}\d\s.,-]{3,}$" placeholder="np. Poznańska, 13" required>
 			
 		</div>
 		
@@ -173,6 +175,8 @@ canvas{
 			<label for="father_name">Imie ojca<span style="color:red;">*</span>:</label>
 			<input type="text" id="father_name" name="father_name" pattern="[A-Za-z\s]{2,50}" required>
 	
+			<label for="birthday">Data urodzenia<span style="color:red;">*</span>:</label>
+			<input type="date" id="birthday" name="birthday" required>
 			<div style="margin:5px;"><span style="color:red;">*</span> - pole obowiązkowe do wypełnienia</div>
 			
 
