@@ -237,7 +237,13 @@ session_start();
     </header>
     <form action="zamow" method = "POST">
       <div class="product-container">
-
+      <div class='product-form'>
+                  <div class='product-info'>
+                    <div class='product-name'>Zamawiasz dla: </div>
+                    <div class='product-price' style="font-size: 1.7rem;"><?php echo $_POST['city_'] ?> </div>
+                  </div>
+                  
+                </div>
         <?php
         $zaklad = $_POST['city_'];
         echo "<input type='hidden' name='city_' value='$zaklad' >";
